@@ -2,9 +2,11 @@
 import { useState, useEffect } from "react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
+import { FaInstagram, FaFacebookF, FaYoutube } from "react-icons/fa";
 
 const Navbar = () => {
   const [scrolled, setScrolled] = useState(false);
+  const [isOpen, setIsOpen] = useState(false);
   const pathname = usePathname();
 
   useEffect(() => {
@@ -14,6 +16,10 @@ const Navbar = () => {
     window.addEventListener("scroll", handleScroll);
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
+
+  useEffect(() => {
+    setIsOpen(false);
+  }, [pathname]);
 
   const navLinks = [
     { name: "Home", href: "/" },
@@ -26,18 +32,18 @@ const Navbar = () => {
   return (
     <div className="fixed top-0 w-full z-[100] flex justify-center pointer-events-none">
       <nav
-        className={`mt-6 transition-all duration-1000 ease-in-out flex items-center justify-between pointer-events-auto
+        className={`mt-4 md:mt-6 transition-all duration-1000 ease-in-out flex items-center justify-between pointer-events-auto
         ${
           scrolled
-            ? "w-[95%] md:w-[90%] lg:w-[85%] bg-[#011425]/40 backdrop-blur-2xl py-3 px-8 rounded-full border border-white/5 shadow-[0_20px_50px_rgba(0,0,0,0.5)]"
-            : "w-full bg-transparent py-8 px-12 md:px-20 border-transparent"
+            ? "w-[92%] md:w-[90%] lg:w-[85%] bg-[#011425]/60 backdrop-blur-2xl py-3 px-6 md:px-8 rounded-full border border-white/10 shadow-[0_20px_50px_rgba(0,0,0,0.5)]"
+            : "w-full bg-transparent py-6 md:py-8 px-8 md:px-20 border-transparent"
         }`}
       >
-        {/* Branding - Kinetic Logo */}
-        <Link href="/" className="group flex flex-col">
+        {/* BRANDING */}
+        <Link href="/" className="group flex flex-col relative z-[110]">
           <h1
-            className={`font-serif tracking-[0.3em] uppercase leading-none transition-all duration-700
-            ${scrolled ? "text-sm md:text-xl" : "text-xl md:text-3xl text-white"}
+            className={`font-serif tracking-[0.2em] md:tracking-[0.3em] uppercase leading-none transition-all duration-700
+            ${scrolled ? "text-sm md:text-xl" : "text-lg md:text-3xl text-white"}
           `}
           >
             Ocean{" "}
@@ -47,13 +53,13 @@ const Navbar = () => {
             Orchid
           </h1>
           {!scrolled && (
-            <p className="text-[7px] uppercase tracking-[0.9em] mt-2 text-[#5C7C89]/60 font-bold group-hover:tracking-[1.1em] transition-all duration-700">
+            <p className="hidden md:block text-[7px] uppercase tracking-[0.9em] mt-2 text-[#5C7C89]/60 font-bold group-hover:tracking-[1.1em] transition-all duration-700">
               Visual Collective
             </p>
           )}
         </Link>
 
-        {/* Navigation links - Minimalist Floating Desktop */}
+        {/* DESKTOP NAVIGATION */}
         <div className="hidden lg:flex items-center gap-10">
           <ul className="flex gap-8">
             {navLinks.map((link) => {
@@ -68,7 +74,6 @@ const Navbar = () => {
                   >
                     {link.name}
                   </Link>
-                  {/* Magnetic Dot Indicator */}
                   <span
                     className={`absolute -bottom-1 left-1/2 -translate-x-1/2 w-1 h-1 rounded-full bg-[#5C7C89] transition-all duration-500 
                     ${isActive ? "opacity-100 scale-100" : "opacity-0 scale-0 group-hover/link:opacity-50 group-hover/link:scale-100"}
@@ -79,15 +84,10 @@ const Navbar = () => {
             })}
           </ul>
 
-          {/* Inquiry Button - Liquid Morphing Effect */}
           <Link
             href="/contact"
             className={`group relative overflow-hidden transition-all duration-700 
-              ${
-                scrolled
-                  ? "bg-white text-[#011425] px-6 py-2 rounded-full text-[8px]"
-                  : "border border-white/20 px-8 py-3 text-[9px]"
-              }
+              ${scrolled ? "bg-white text-[#011425] px-6 py-2 rounded-full text-[8px]" : "border border-white/20 px-8 py-3 text-[9px]"}
             `}
           >
             <span className="relative z-10 font-black uppercase tracking-[0.4em]">
@@ -99,16 +99,72 @@ const Navbar = () => {
           </Link>
         </div>
 
-        {/* Mobile Toggle with Glass Circle */}
+        {/* MOBILE TOGGLE BUTTON */}
         <button
-          className={`lg:hidden flex flex-col items-center justify-center gap-1.5 transition-all duration-500
-            ${scrolled ? "w-10 h-10 bg-white/10 rounded-full" : ""}
+          onClick={() => setIsOpen(!isOpen)}
+          className={`lg:hidden relative z-[110] flex flex-col items-center justify-center gap-1.5 w-10 h-10 transition-all duration-500
+            ${scrolled ? "bg-white/10 rounded-full" : ""}
           `}
           aria-label="Toggle Menu"
         >
-          <div className="w-6 h-[1px] bg-white"></div>
-          <div className="w-4 h-[1px] bg-[#5C7C89] self-end"></div>
+          <div
+            className={`w-6 h-[1px] bg-white transition-all duration-500 ${isOpen ? "rotate-45 translate-y-2" : ""}`}
+          ></div>
+          <div
+            className={`w-4 h-[1px] bg-[#5C7C89] self-end transition-all duration-500 ${isOpen ? "opacity-0" : ""}`}
+          ></div>
+          <div
+            className={`w-6 h-[1px] bg-white transition-all duration-500 ${isOpen ? "-rotate-45 -translate-y-0.5" : ""}`}
+          ></div>
         </button>
+
+        {/* MOBILE OVERLAY MENU */}
+        <div
+          className={`fixed inset-0 bg-[#011425] z-[105] flex flex-col items-center justify-center transition-all duration-700 ease-in-out lg:hidden
+          ${isOpen ? "translate-y-0 opacity-100" : "-translate-y-full opacity-0"}
+        `}
+        >
+          <div className="absolute inset-0 flex items-center justify-center opacity-[0.03] pointer-events-none">
+            <h2 className="text-[25vw] font-serif italic uppercase text-white rotate-90">
+              Orchid
+            </h2>
+          </div>
+
+          <ul className="relative z-10 flex flex-col items-center gap-8">
+            {navLinks.map((link, i) => (
+              <li
+                key={link.name}
+                className={`transform transition-all duration-700 delay-[${i * 100}ms] ${isOpen ? "translate-y-0 opacity-100" : "translate-y-10 opacity-0"}`}
+              >
+                <Link
+                  href={link.href}
+                  className={`text-2xl md:text-4xl font-serif italic tracking-tighter hover:text-[#5C7C89] transition-all
+                    ${pathname === link.href ? "text-[#5C7C89]" : "text-white"}
+                  `}
+                >
+                  {link.name}
+                </Link>
+              </li>
+            ))}
+            <li
+              className={`mt-8 transform transition-all duration-1000 ${isOpen ? "scale-100 opacity-100" : "scale-50 opacity-0"}`}
+            >
+              <Link
+                href="/contact"
+                className="px-12 py-4 bg-[#5C7C89] text-white text-[10px] uppercase tracking-[0.8em] font-black"
+              >
+                Inquire Now
+              </Link>
+            </li>
+          </ul>
+
+          {/* Mobile Socials */}
+          <div className="absolute bottom-12 flex gap-8 text-[#5C7C89]">
+            <FaInstagram size={20} />
+            <FaFacebookF size={18} />
+            <FaYoutube size={20} />
+          </div>
+        </div>
       </nav>
     </div>
   );
