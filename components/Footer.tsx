@@ -33,7 +33,7 @@ const Footer = () => {
                 href="mailto:hello@oceanoforchid.com"
                 className="text-sm md:text-xl font-light tracking-widest hover:text-[#5C7C89] transition-colors"
               >
-                hello@oceanoforchid.com
+                oceanoforchid@gmail.com
               </a>
             </div>
           </div>
@@ -64,7 +64,7 @@ const Footer = () => {
                     href="/packages"
                     className="hover:text-white transition"
                   >
-                    Investment
+                    Packages
                   </Link>
                 </li>
                 <li>
@@ -82,22 +82,34 @@ const Footer = () => {
               </h4>
               <ul className="space-y-4 text-[10px] uppercase tracking-[0.3em] font-medium text-zinc-400">
                 <li>
-                  <a href="#" className="hover:text-white transition">
+                  <a
+                    href="https://www.instagram.com/o3_official_/"
+                    className="hover:text-white transition"
+                  >
                     Instagram
                   </a>
                 </li>
                 <li>
-                  <a href="#" className="hover:text-white transition">
+                  <a
+                    href="https://www.facebook.com/o3orchid"
+                    className="hover:text-white transition"
+                  >
                     Facebook
                   </a>
                 </li>
                 <li>
-                  <a href="#" className="hover:text-white transition">
+                  <a
+                    href="https://www.youtube.com/@OceanOfOrchid"
+                    className="hover:text-white transition"
+                  >
                     Youtube
                   </a>
                 </li>
                 <li>
-                  <a href="#" className="hover:text-white transition">
+                  <a
+                    href="https://wa.me/+8801703526488"
+                    className="hover:text-white transition"
+                  >
                     WhatsApp
                   </a>
                 </li>
@@ -123,7 +135,7 @@ const Footer = () => {
         <div className="mt-40 pt-8 border-t border-white/5 flex flex-col md:flex-row justify-between items-center gap-6">
           <div className="flex flex-col md:flex-row items-center gap-4 md:gap-10 opacity-30">
             <p className="text-[8px] uppercase tracking-[0.6em]">
-              © {currentYear} Ocean of Orchid
+              © {currentYear} Ocean of Orchid || Developed by A.S.M. Sium
             </p>
             <Link
               href="/privacy"
