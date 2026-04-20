@@ -9,15 +9,6 @@ const Navbar = () => {
   const [isOpen, setIsOpen] = useState(false);
   const pathname = usePathname();
 
-  // 1. Fixed Scroll Behavior: Menu open thakle scroll bondho hobe
-  useEffect(() => {
-    if (isOpen) {
-      document.body.style.overflow = "hidden";
-    } else {
-      document.body.style.overflow = "unset";
-    }
-  }, [isOpen]);
-
   useEffect(() => {
     const handleScroll = () => {
       setScrolled(window.scrollY > 20);
@@ -39,21 +30,20 @@ const Navbar = () => {
   ];
 
   return (
-    <div className="fixed top-0 w-full z-[100] flex justify-center pointer-events-none">
+    <div className="fixed top-0 w-full z-[999] flex justify-center pointer-events-none">
       <nav
-        className={`mt-4 md:mt-6 transition-all duration-1000 ease-in-out flex items-center justify-between pointer-events-auto
+        className={`mt-4 md:mt-6 transition-all duration-700 ease-in-out flex items-center justify-between pointer-events-auto
         ${
           scrolled || isOpen
-            ? "w-[92%] md:w-[90%] lg:w-[85%] bg-[#011425] md:bg-[#011425]/60 backdrop-blur-2xl py-3 px-6 md:px-8 rounded-full border border-white/10 shadow-[0_20px_50px_rgba(0,0,0,0.5)]"
+            ? "w-[92%] md:w-[90%] lg:w-[85%] bg-[#011425] py-3 px-6 md:px-8 rounded-full border border-white/10 shadow-2xl"
             : "w-full bg-transparent py-6 md:py-8 px-8 md:px-20 border-transparent"
         }`}
       >
         {/* BRANDING */}
-        <Link href="/" className="group flex flex-col relative z-[110]">
+        <Link href="/" className="group flex flex-col relative z-[1001]">
           <h1
             className={`font-serif tracking-[0.2em] md:tracking-[0.3em] uppercase leading-none transition-all duration-700
-            ${scrolled || isOpen ? "text-sm md:text-xl" : "text-lg md:text-3xl text-white"}
-          `}
+            ${scrolled || isOpen ? "text-sm md:text-xl" : "text-lg md:text-3xl text-white"}`}
           >
             Ocean{" "}
             <span className="italic font-extralight lowercase text-[#5C7C89]">
@@ -63,49 +53,10 @@ const Navbar = () => {
           </h1>
         </Link>
 
-        {/* DESKTOP NAVIGATION */}
-        <div className="hidden lg:flex items-center gap-10">
-          <ul className="flex gap-8">
-            {navLinks.map((link) => {
-              const isActive = pathname === link.href;
-              return (
-                <li key={link.name} className="relative group/link">
-                  <Link
-                    href={link.href}
-                    className={`text-[9px] uppercase tracking-[0.4em] font-bold transition-all duration-500
-                      ${isActive ? "text-[#5C7C89]" : "text-white/50 hover:text-white"}
-                    `}
-                  >
-                    {link.name}
-                  </Link>
-                  <span
-                    className={`absolute -bottom-1 left-1/2 -translate-x-1/2 w-1 h-1 rounded-full bg-[#5C7C89] transition-all duration-500 
-                    ${isActive ? "opacity-100 scale-100" : "opacity-0 scale-0 group-hover/link:opacity-50 group-hover/link:scale-100"}`}
-                  />
-                </li>
-              );
-            })}
-          </ul>
-
-          <Link
-            href="/contact"
-            className={`group relative overflow-hidden transition-all duration-700 
-              ${scrolled ? "bg-white text-[#011425] px-6 py-2 rounded-full text-[8px]" : "border border-white/20 px-8 py-3 text-[9px]"}`}
-          >
-            <span className="relative z-10 font-black uppercase tracking-[0.4em]">
-              Contact
-            </span>
-            {!scrolled && (
-              <div className="absolute inset-0 bg-[#5C7C89] translate-y-full group-hover:translate-y-0 transition-transform duration-500" />
-            )}
-          </Link>
-        </div>
-
         {/* MOBILE TOGGLE BUTTON */}
         <button
           onClick={() => setIsOpen(!isOpen)}
-          className={`lg:hidden relative z-[110] flex flex-col items-center justify-center gap-1.5 w-10 h-10 transition-all duration-500
-            ${scrolled || isOpen ? "bg-white/10 rounded-full" : ""}`}
+          className="lg:hidden relative z-[1001] flex flex-col items-center justify-center gap-1.5 w-10 h-10"
           aria-label="Toggle Menu"
         >
           <div
@@ -119,60 +70,56 @@ const Navbar = () => {
           />
         </button>
 
-        {/* MOBILE OVERLAY MENU */}
-        <div
-          className={`fixed inset-0 bg-[#011425] z-[105] flex flex-col items-center justify-center transition-all duration-700 ease-[cubic-bezier(0.23,1,0.32,1)] lg:hidden
-          ${isOpen ? "translate-y-0 opacity-100" : "-translate-y-full opacity-0"}`}
-        >
-          {/* Ghost Text Overlay */}
-          <div className="absolute inset-0 flex items-center justify-center opacity-[0.02] pointer-events-none">
-            <h2 className="text-[40vw] font-serif italic uppercase text-white rotate-90 leading-none">
-              Orchid
-            </h2>
-          </div>
-
-          <ul className="relative z-10 flex flex-col items-center gap-6 md:gap-10">
-            {navLinks.map((link, i) => (
-              <li
-                key={link.name}
-                className={`transform transition-all duration-700 delay-[${i * 50}ms] ${isOpen ? "translate-y-0 opacity-100" : "translate-y-10 opacity-0"}`}
-              >
+        {/* DESKTOP NAVIGATION */}
+        <div className="hidden lg:flex items-center gap-10">
+          <ul className="flex gap-8">
+            {navLinks.map((link) => (
+              <li key={link.name} className="relative group/link">
                 <Link
                   href={link.href}
-                  className={`text-3xl md:text-5xl font-serif italic tracking-tighter hover:text-[#5C7C89] transition-all
-                    ${pathname === link.href ? "text-[#5C7C89]" : "text-white"}`}
+                  className={`text-[9px] uppercase tracking-[0.4em] font-bold ${pathname === link.href ? "text-[#5C7C89]" : "text-white/50 hover:text-white"}`}
                 >
                   {link.name}
                 </Link>
               </li>
             ))}
-            <li
-              className={`mt-10 transform transition-all duration-1000 ${isOpen ? "scale-100 opacity-100" : "scale-50 opacity-0"}`}
-            >
+          </ul>
+          <Link
+            href="/contact"
+            className={`px-8 py-3 text-[9px] font-black uppercase tracking-[0.4em] ${scrolled ? "bg-white text-[#011425] rounded-full" : "border border-white/20 text-white"}`}
+          >
+            Contact
+          </Link>
+        </div>
+
+        {/* MOBILE OVERLAY MENU */}
+        <div
+          className={`fixed inset-x-0 top-0 bg-[#011425] shadow-2xl transition-all duration-700 ease-in-out lg:hidden z-[1000]
+          ${isOpen ? "h-screen opacity-100" : "h-0 opacity-0 overflow-hidden"}`}
+        >
+          <ul className="flex flex-col items-center justify-center h-full gap-8">
+            {navLinks.map((link, i) => (
+              <li
+                key={link.name}
+                className={`transition-all duration-700 ${isOpen ? "translate-y-0 opacity-100" : "translate-y-10 opacity-0"}`}
+              >
+                <Link
+                  href={link.href}
+                  className={`text-3xl font-serif italic ${pathname === link.href ? "text-[#5C7C89]" : "text-white"}`}
+                >
+                  {link.name}
+                </Link>
+              </li>
+            ))}
+            <li className="mt-10">
               <Link
                 href="/contact"
-                className="px-14 py-5 bg-[#5C7C89] text-white text-[11px] uppercase tracking-[0.8em] font-black shadow-2xl"
+                className="px-12 py-4 bg-[#5C7C89] text-white text-[10px] uppercase tracking-[0.8em] font-black"
               >
                 Inquire Now
               </Link>
             </li>
           </ul>
-
-          {/* Socials at Bottom */}
-          <div className="absolute bottom-12 flex gap-10 text-[#5C7C89]/60">
-            <FaInstagram
-              size={22}
-              className="hover:text-white transition-colors"
-            />
-            <FaFacebookF
-              size={20}
-              className="hover:text-white transition-colors"
-            />
-            <FaYoutube
-              size={22}
-              className="hover:text-white transition-colors"
-            />
-          </div>
         </div>
       </nav>
     </div>
