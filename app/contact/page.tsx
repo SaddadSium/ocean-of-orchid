@@ -1,7 +1,6 @@
 "use client";
 import { useState } from "react";
 import Link from "next/link";
-// FaCircle added to the import list below
 import {
   FaInstagram,
   FaFacebookF,
@@ -9,7 +8,6 @@ import {
   FaMapMarkerAlt,
   FaPhoneAlt,
   FaYoutube,
-  FaMap,
   FaCircle,
 } from "react-icons/fa";
 
@@ -35,7 +33,6 @@ export default function Contact() {
     };
 
     try {
-      // Tomar Google Web App URL ekhane boshao
       const GOOGLE_SHEET_URL =
         "https://script.google.com/macros/s/AKfycbx3mqXzvDahc6S1mr_yMF4H_9ETiITexrSSCeZXxvs6GkUOQzXdUjR7dXFtHGIzzmM/exec";
 
@@ -80,7 +77,18 @@ export default function Contact() {
                 <p className="text-[9px] uppercase tracking-[0.3em] text-[#5C7C89] font-bold mb-1">
                   Studio
                 </p>
-                <p className="text-sm tracking-widest">+880 1XXX XXXXXX</p>
+                <p className="text-sm tracking-widest">+880 1703 526488</p>
+              </div>
+            </div>
+            <div className="flex items-start gap-6 group">
+              <div className="w-12 h-12 rounded-full border border-white/10 flex items-center justify-center group-hover:border-[#5C7C89] transition-all">
+                <FaPhoneAlt size={14} className="text-[#5C7C89]" />
+              </div>
+              <div>
+                <p className="text-[9px] uppercase tracking-[0.3em] text-[#5C7C89] font-bold mb-1">
+                  Studio
+                </p>
+                <p className="text-sm tracking-widest">+880 1795 771000</p>
               </div>
             </div>
             <div className="flex items-start gap-6 group">
@@ -92,7 +100,7 @@ export default function Contact() {
                   Email
                 </p>
                 <p className="text-sm tracking-widest font-sans">
-                  hello@oceanoforchid.com
+                  oceanoforchid@gmail.com
                 </p>
               </div>
             </div>
@@ -105,7 +113,7 @@ export default function Contact() {
                   HQ
                 </p>
                 <p className="text-sm tracking-widest font-sans uppercase">
-                  Banani, Dhaka
+                  Mitford, Puran Dhaka
                 </p>
               </div>
             </div>
@@ -114,19 +122,25 @@ export default function Contact() {
           {/* Socials */}
           <div className="flex gap-4 pt-6">
             <a
-              href="#"
+              href="https://www.instagram.com/o3_official_/"
+              target="_blank"
+              rel="noopener noreferrer"
               className="w-12 h-12 border border-white/10 flex items-center justify-center hover:bg-[#5C7C89] transition-all"
             >
               <FaInstagram size={18} />
             </a>
             <a
-              href="#"
+              href="https://www.facebook.com/o3orchid"
+              target="_blank"
+              rel="noopener noreferrer"
               className="w-12 h-12 border border-white/10 flex items-center justify-center hover:bg-[#1877F2] transition-all"
             >
               <FaFacebookF size={16} />
             </a>
             <a
-              href="#"
+              href="https://www.youtube.com/@OceanOfOrchid"
+              target="_blank"
+              rel="noopener noreferrer"
               className="w-12 h-12 border border-white/10 flex items-center justify-center hover:bg-[#FF0000] transition-all"
             >
               <FaYoutube size={18} />
@@ -331,22 +345,31 @@ export default function Contact() {
             HQ Location
           </h2>
         </div>
-        <div className="relative h-[600px] bg-white/[0.02] border border-white/10 flex items-center justify-center p-6 shadow-2xl group overflow-hidden">
-          <FaMap
-            size={50}
-            className="text-[#5C7C89]/30 animate-bounce group-hover:scale-110 transition-transform duration-700"
-          />
-          <div className="absolute bottom-10 left-10 right-10 p-10 bg-[#011425]/90 backdrop-blur-3xl border border-white/10 max-w-sm">
+        <div className="relative h-[600px] bg-white/[0.02] border border-white/10 shadow-2xl group overflow-hidden">
+          {/* Live Google Map Embed */}
+          <iframe
+            src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3652.8806509531535!2d90.3986!3d23.7159!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3755b8d4f0d611b9%3A0x6e3c0c05934bc81!2sMitford%2C%20Dhaka!5e0!3m2!1sen!2sbd!4v1710000000000!5m2!1sen!2sbd"
+            width="100%"
+            height="100%"
+            style={{ border: 0, filter: "invert(90%) hue-rotate(180deg)" }}
+            allowFullScreen={false}
+            loading="lazy"
+            referrerPolicy="no-referrer-when-downgrade"
+            className="w-full h-full opacity-80 group-hover:opacity-100 transition-opacity duration-500"
+          ></iframe>
+
+          <div className="absolute bottom-10 left-10 right-10 p-8 md:p-10 bg-[#011425]/90 backdrop-blur-3xl border border-white/10 max-w-sm pointer-events-auto">
             <FaMapMarkerAlt size={16} className="text-[#5C7C89] mb-4" />
             <h3 className="text-xl font-serif italic text-white mb-2 uppercase">
               Orchid Atelier
             </h3>
-            <p className="text-[10px] uppercase tracking-[0.3em] text-zinc-500 leading-loose">
-              Banani, Dhaka <br /> Bangladesh
+            <p className="text-[10px] uppercase tracking-[0.3em] text-zinc-400 leading-loose">
+              Mitford, Puran Dhaka <br /> Bangladesh
             </p>
             <Link
-              href="https://maps.google.com"
+              href="https://maps.app.goo.gl/uBzgfSXrCyaK1gLP7"
               target="_blank"
+              rel="noopener noreferrer"
               className="inline-block mt-6 text-[10px] uppercase tracking-[0.5em] font-black text-[#5C7C89] hover:text-white transition-all border-b border-[#5C7C89]/30 pb-1"
             >
               Get Directions

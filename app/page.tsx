@@ -83,11 +83,11 @@ export default function Home() {
       <section className="relative h-screen w-full flex items-center justify-center overflow-hidden">
         <div className="absolute inset-0 z-0">
           <img
-            src="https://images.unsplash.com/photo-1519225421980-715cb0215aed?q=80&w=2000"
-            className="w-full h-full object-cover opacity-60"
+            src="/images/hero/hero.jpg"
+            className="w-full h-full object-cover opacity-97"
             alt="Hero Cover"
           />
-          <div className="absolute inset-0 bg-gradient-to-b from-[#011425] via-[#011425]/40 to-[#011425]" />
+          <div className="absolute inset-0 bg-gradient-to-b from-[#011425] via-[#011425]/5 to-[#011425]" />
         </div>
 
         <div className="relative z-20 text-center px-6 space-y-12">

@@ -1,6 +1,11 @@
 "use client";
 import Link from "next/link";
-import { FaInstagram, FaFacebookF, FaLinkedinIn } from "react-icons/fa";
+import {
+  FaInstagram,
+  FaFacebookF,
+  FaLinkedinIn,
+  FaGlobe,
+} from "react-icons/fa";
 
 export default function About() {
   const leadDuo = [
@@ -25,6 +30,7 @@ export default function About() {
       insta: "https://www.instagram.com/saddad_sium/",
       fb: "https://www.facebook.com/saddadsium.official/",
       linkedin: "https://www.linkedin.com/in/siumofficial-webdeveloper/",
+      website: "https://sium-photography-portfolio.vercel.app/",
     },
   ];
 
@@ -135,7 +141,7 @@ export default function About() {
         </div>
       </section>
 
-      {/* 3. THE VISIONARIES - Lead Socials (Insta, FB, LinkedIn) */}
+      {/* 3. THE VISIONARIES */}
       <section className="py-32 px-8 md:px-20 bg-black/20">
         <div className="max-w-[1800px] mx-auto">
           <div className="text-center mb-24">
@@ -154,7 +160,7 @@ export default function About() {
                     alt={lead.name}
                   />
                   {/* Floating Socials for Key Persons */}
-                  <div className="absolute inset-0 bg-gradient-to-t from-[#011425] to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-700 flex items-end justify-center pb-10 gap-5 z-20">
+                  <div className="absolute inset-0 bg-gradient-to-t from-[#011425] via-[#011425]/40 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-700 flex items-end justify-center pb-10 gap-4 z-20">
                     <a
                       href={lead.insta}
                       target="_blank"
@@ -179,8 +185,22 @@ export default function About() {
                     >
                       <FaLinkedinIn size={16} />
                     </a>
+
+                    {/* Personal Website Icon - Available for Sium */}
+                    {lead.website && (
+                      <a
+                        href={lead.website}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="w-10 h-10 bg-white/10 backdrop-blur-md rounded-full flex items-center justify-center hover:bg-[#5C7C89] transition-all text-white"
+                        title="Personal Portfolio"
+                      >
+                        <FaGlobe size={16} />
+                      </a>
+                    )}
                   </div>
                 </div>
+
                 <div className="space-y-3">
                   <span className="text-[10px] font-serif italic text-[#5C7C89]/60">
                     {lead.id}
@@ -198,7 +218,7 @@ export default function About() {
         </div>
       </section>
 
-      {/* 4. THE COLLECTIVE - Mosaic Portraits with Insta & FB */}
+      {/* 4. THE COLLECTIVE */}
       <section className="py-32 px-8 md:px-20 border-t border-white/5">
         <div className="max-w-[1800px] mx-auto">
           <div className="mb-20 flex flex-col md:flex-row justify-between items-end gap-6 border-b border-white/5 pb-10">
@@ -220,7 +240,6 @@ export default function About() {
                     alt={member.name}
                   />
 
-                  {/* Quick Social Overlay for Collective Members */}
                   <div className="absolute inset-0 flex items-center justify-center gap-3 opacity-0 group-hover:opacity-100 transition-opacity duration-500 bg-black/40">
                     <a
                       href={member.insta}
